@@ -4,22 +4,6 @@
         'category': 'Acc',
         'value': 3,
         'color': '#074285'
-    }, {
-        'category': 'Aud',
-        'value': 2,
-        'color': '#0082ca'
-    }, {
-        'category': 'Cam',
-        'value': 1,
-        'color': '#0066AE'
-    }, {
-        'category': 'Ce',
-        'value': 5,
-        'color': '#0d4bcf'
-    }, {
-        'category': 'Comp',
-        'value': 4,
-        'color': '#0094ff'
     }];
 
     genChart('#chart', json);
@@ -45,7 +29,7 @@ function genChart(elementId, json) {
             'x1': 0,
             'y1': 0,
             'x2': 0,
-            'y2': 300
+            'y2': categories.length*50
         };
     });
 
@@ -63,7 +47,7 @@ function genChart(elementId, json) {
 
     var yscale = d3.scale.linear()
         .domain([0, categories.length])
-        .range([0, 300]);
+        .range([0, categories.length*50]);
 
     var colorScale = d3.scale.quantize()
         .domain([0, categories.length])
@@ -73,7 +57,7 @@ function genChart(elementId, json) {
         .append('svg')
         .attr({
             'width': 800,
-            'height': 400
+            'height': categories.length*60
         });
 
 
@@ -124,8 +108,9 @@ function genChart(elementId, json) {
         .attr('id', 'yaxis')
         .call(yAxis);
 
+    var xaxis_len = categories.length*50+10;
     var x_xis = canvas.append('g')
-        .attr("transform", "translate(150,310)")
+        .attr("transform", "translate(150,"+xaxis_len+")")
         .attr('id', 'xaxis')
         .call(xAxis);
 
