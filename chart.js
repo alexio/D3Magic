@@ -4,6 +4,22 @@
         'category': 'Acc',
         'value': 3,
         'color': '#074285'
+    },{
+        'category': 'Acewc',
+        'value': 2,
+        'color': '#074285'
+    },{
+        'category': 'Aewcc',
+        'value': 1,
+        'color': '#074285'
+    },{
+        'category': 'Awewecc',
+        'value': 4,
+        'color': '#074285'
+    },{
+        'category': 'Acewc',
+        'value': 5,
+        'color': '#074285'
     }];
 
     genChart('#chart', json);
@@ -24,20 +40,23 @@ function genChart(elementId, json) {
     });
 
 
-    var grid = d3.range(25).map(function(i) {
+    var grid = d3.range(6).map(function(i) {
+        console.log("The GRID!!!, " +i);
         return {
             'x1': 0,
             'y1': 0,
             'x2': 0,
-            'y2': categories.length*50
+            'y2': categories.length*48
         };
     });
 
     var tickVals = grid.map(function(d, i) {
+        console.log("The Ticks!!!, " + d + " , " +i);
+        console.log(d);
         if (i > 0) {
-            return i * 10;
+            return i;
         } else if (i === 0) {
-            return "100";
+            return "";
         }
     });
 
@@ -56,8 +75,8 @@ function genChart(elementId, json) {
     var canvas = d3.select(elementId)
         .append('svg')
         .attr({
-            'width': 800,
-            'height': categories.length*60
+            'width': 900,
+            'height': categories.length*70
         });
 
 
@@ -70,13 +89,13 @@ function genChart(elementId, json) {
         .append('line')
         .attr({
             'x1': function(d, i) {
-                return i * 30;
+                return i * 144;
             },
             'y1': function(d) {
                 return d.y1;
             },
             'x2': function(d, i) {
-                return i * 30;
+                return i * 144;
             },
             'y2': function(d) {
                 return d.y2;
@@ -104,11 +123,11 @@ function genChart(elementId, json) {
         .tickValues(d3.range(6));
 
     var y_xis = canvas.append('g')
-        .attr("transform", "translate(150,0)")
+        .attr("transform", "translate(150,15)")
         .attr('id', 'yaxis')
         .call(yAxis);
 
-    var xaxis_len = categories.length*50+10;
+    var xaxis_len = categories.length*48+10;
     var x_xis = canvas.append('g')
         .attr("transform", "translate(150,"+xaxis_len+")")
         .attr('id', 'xaxis')
@@ -121,7 +140,7 @@ function genChart(elementId, json) {
         .data(values)
         .enter()
         .append('rect')
-        .attr('height', 19)
+        .attr('height', 35)
         .attr({
             'x': 0,
             'y': function(d, i) {
