@@ -1,20 +1,20 @@
 (function() {
 
     var json = [{
-      'categories':'AC',
-      'values': 213,
+      'category':'AC',
+      'value': 213,
       'color':'#0000b4'
     }, {
-      'categories':'AP',
-      'values': 156,
+      'category':'AP',
+      'value': 156,
       'color':'#0082ca'
     },{
-      'categories':'AB',
-      'values': 180,
+      'category':'AB',
+      'value': 180,
       'color':'#0000b4'
     }, {
-      'categories':'AD',
-      'values': 120,
+      'category':'AD',
+      'value': 120,
       'color':'#0082ca'
     }];
 
@@ -28,7 +28,7 @@ function genChart(elementId, json) {
     var colors = [];
 
     json.forEach(function(item) {
-        categories.push(item.categories);
+        categories.push(item.category);
         values.push(item.values);
         colors.push(item.color);
     });
