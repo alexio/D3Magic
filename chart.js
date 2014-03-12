@@ -127,7 +127,7 @@ function genChart(elementId, json) {
         .attr('id', 'yaxis')
         .call(yAxis);
 
-    var xaxis_len = categories.length*48+10;
+    var xaxis_len = categories.length*51+10;
     var x_xis = canvas.append('g')
         .attr("transform", "translate(150,"+xaxis_len+")")
         .attr('id', 'xaxis')
