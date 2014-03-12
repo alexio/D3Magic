@@ -1,21 +1,25 @@
 (function() {
 
     var json = [{
-      'category':'AC',
-      'value': 213,
-      'color':'#0000b4'
+        'category': 'Acc',
+        'value': 3,
+        'color': '#074285'
     }, {
-      'category':'AP',
-      'value': 156,
-      'color':'#0082ca'
-    },{
-      'category':'AB',
-      'value': 180,
-      'color':'#0000b4'
+        'category': 'Aud',
+        'value': 2,
+        'color': '#0082ca'
     }, {
-      'category':'AD',
-      'value': 120,
-      'color':'#0082ca'
+        'category': 'Cam',
+        'value': 1,
+        'color': '#0066AE'
+    }, {
+        'category': 'Ce',
+        'value': 5,
+        'color': '#0d4bcf'
+    }, {
+        'category': 'Comp',
+        'value': 4,
+        'color': '#0094ff'
     }];
 
     genChart('#chart', json);
@@ -27,18 +31,21 @@ function genChart(elementId, json) {
     var values = [];
     var colors = [];
 
+    categories.push('');
+    values.push(0);
     json.forEach(function(item) {
         categories.push(item.category);
-        values.push(item.values);
+        values.push(item.value);
         colors.push(item.color);
     });
+
 
     var grid = d3.range(25).map(function(i) {
         return {
             'x1': 0,
             'y1': 0,
             'x2': 0,
-            'y2': categories.length*28
+            'y2': 300
         };
     });
 
@@ -50,14 +57,13 @@ function genChart(elementId, json) {
         }
     });
 
-    var width = d3.max(values)*3.5;
     var xscale = d3.scale.linear()
-        .domain([0, d3.max(values)+30])
-        .range([0, width]);
+        .domain([0, 5])
+        .range([0, 722]);
 
     var yscale = d3.scale.linear()
         .domain([0, categories.length])
-        .range([0, categories.length*28]);
+        .range([0, 300]);
 
     var colorScale = d3.scale.quantize()
         .domain([0, categories.length])
@@ -66,9 +72,10 @@ function genChart(elementId, json) {
     var canvas = d3.select(elementId)
         .append('svg')
         .attr({
-            'width': d3.max(values)*4.5,
-            'height': 31.25*categories.length
+            'width': 800,
+            'height': 400
         });
+
 
     var grids = canvas.append('g')
         .attr('id', 'grid')
@@ -110,7 +117,7 @@ function genChart(elementId, json) {
         .tickFormat(function(d, i) {
             return categories[i];
         })
-        .tickValues(d3.range(17));
+        .tickValues(d3.range(6));
 
     var y_xis = canvas.append('g')
         .attr("transform", "translate(150,0)")
@@ -118,7 +125,7 @@ function genChart(elementId, json) {
         .call(yAxis);
 
     var x_xis = canvas.append('g')
-        .attr("transform", "translate(150,480)")
+        .attr("transform", "translate(150,310)")
         .attr('id', 'xaxis')
         .call(xAxis);
 
@@ -133,7 +140,7 @@ function genChart(elementId, json) {
         .attr({
             'x': 0,
             'y': function(d, i) {
-                return yscale(i) + 19;
+                return yscale(i) + 0;
             }
         })
         .style('fill', function(d, i) {
@@ -162,7 +169,7 @@ function genChart(elementId, json) {
                 return xscale(d) - 200;
             },
             'y': function(d, i) {
-                return yscale(i) + 35;
+                return yscale(i) + 15;
             }
         })
         .text(function(d) {
@@ -171,7 +178,4 @@ function genChart(elementId, json) {
             'fill': '#fff',
             'font-size': '14px'
         });
-
-
-
 }

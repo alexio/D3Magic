@@ -5,3 +5,7 @@
   #xaxis text, #yaxis text {
     font-size: 12px;
   }
+
+  #yaxis {
+    padding-top-top: 20px;
+  }
